@@ -6,40 +6,37 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Categories": {
-      "post": {
+    "/api/Categories/{id}": {
+      "get": {
         "tags": [
           "Categories"
         ],
-        "operationId": "Categories_Create",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
+        "operationId": "Categories_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int64"
+                  "$ref": "#/components/schemas/CategoryDto"
                 }
               }
             }
           }
         }
-      }
-    },
-    "/api/Categories/{id}": {
+      },
       "put": {
         "tags": [
           "Categories"
@@ -115,18 +112,39 @@
         }
       }
     },
-    "/api/Products": {
+    "/api/Categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "operationId": "Categories_GetAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
-          "Products"
+          "Categories"
         ],
-        "operationId": "Products_Create",
+        "operationId": "Categories_Create",
         "requestBody": {
           "x-name": "command",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCommand2"
+                "$ref": "#/components/schemas/CreateCommand"
               }
             }
           },
@@ -149,6 +167,36 @@
       }
     },
     "/api/Products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Products"
@@ -217,6 +265,60 @@
                 "schema": {
                   "type": "string",
                   "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetAll",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductLiDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Create",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommand2"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             }
@@ -606,6 +708,23 @@
   },
   "components": {
     "schemas": {
+      "CategoryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      },
       "CreateCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -633,6 +752,52 @@
           },
           "disabled": {
             "type": "boolean"
+          }
+        }
+      },
+      "ProductDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sellingPrice": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ProductLiDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sellingPrice": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
