@@ -14,6 +14,6 @@ namespace Clean_Architecture_Task.Domain.Entities
         public string Name { get; set; }
         public bool Disabled { get; set; }
         public bool Deleted { get; set; }
-        public IList<Product> Products { get; private set; }
+        public IList<Product> Products { get; set; }
     }
 }

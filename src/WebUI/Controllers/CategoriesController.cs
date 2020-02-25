@@ -20,13 +20,13 @@ namespace Clean_Architecture_Task.WebUI.Controllers
             return await Mediator.Send(new GetAll());
         }
         [HttpPost]
-        public async Task<ActionResult<long>> Create(CreateCommand command)
+        public async Task<ActionResult<int>> Create(CreateCommand command)
         {
             return await Mediator.Send(command);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(long id, UpdateCommand command)
+        public async Task<ActionResult> Update(int id, UpdateCommand command)
         {
             if (id != command.Id)
             {

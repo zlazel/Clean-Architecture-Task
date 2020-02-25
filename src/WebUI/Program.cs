@@ -28,7 +28,7 @@ namespace Clean_Architecture_Task.WebUI
 
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-                    await ApplicationDbContextSeed.SeedAsync(userManager);
+                    await ApplicationDbContextSeed.SeedAsync(userManager,context);
                 }
                 catch (Exception ex)
                 {

@@ -10,6 +10,7 @@ namespace Canteen.Application.Products.Models
 {
     public class ProductLiDto : IMapFrom<Product>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal SellingPrice { get; set; }
         public bool Disabled { get; set; }

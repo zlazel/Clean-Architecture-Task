@@ -1325,6 +1325,7 @@ export interface IProductDto {
 }
 
 export class ProductLiDto implements IProductLiDto {
+    id?: number;
     name?: string | undefined;
     sellingPrice?: number;
     disabled?: boolean;
@@ -1341,6 +1342,7 @@ export class ProductLiDto implements IProductLiDto {
 
     init(_data?: any) {
         if (_data) {
+            this.id = _data["id"];
             this.name = _data["name"];
             this.sellingPrice = _data["sellingPrice"];
             this.disabled = _data["disabled"];
@@ -1357,6 +1359,7 @@ export class ProductLiDto implements IProductLiDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
         data["name"] = this.name;
         data["sellingPrice"] = this.sellingPrice;
         data["disabled"] = this.disabled;
@@ -1366,6 +1369,7 @@ export class ProductLiDto implements IProductLiDto {
 }
 
 export interface IProductLiDto {
+    id?: number;
     name?: string | undefined;
     sellingPrice?: number;
     disabled?: boolean;
