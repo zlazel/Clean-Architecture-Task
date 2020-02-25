@@ -28,6 +28,7 @@ namespace Canteen.Application.Products.Queries
                 return _mapper.Map<List<ProductLiDto>>(
                     await _context.Products
                     .Where(a =>a.Deleted == false && a.Disabled==false)
+                    .Include(x=>x.Category)
                     .ToListAsync(cancellationToken));
             }
         }
